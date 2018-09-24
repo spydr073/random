@@ -57,7 +57,7 @@ export
 randList : Num a => Nat -> IO a -> IO (List a)
 randList n rand with (n)
   | Z    = pure []
-  | S n' = sequence $ go n' []
+  | S n' = sequence $ go n' [rand]
   where go : Num a => Nat -> List (IO a) -> List (IO a)
         go c xs with (c)
           | Z    = xs
