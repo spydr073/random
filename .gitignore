@@ -1,0 +1,10 @@
+
+*.ibc
+*.o
+*.a
+
+src/Data/Tree/BST.idr
+src/Data/Tree/Rose.idr
+src/Data/Tree/Treap.idr
+
+

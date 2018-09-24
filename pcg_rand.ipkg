@@ -1,0 +1,7 @@
+package pcg_rand
+
+sourcedir = src
+objs      = pcg_idris_ffi.so
+
+modules   = System.Random.PCG
+
