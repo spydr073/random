@@ -30,29 +30,7 @@
 
 #include <time.h>
 #include <inttypes.h>
-
-struct pcg_state_setseq_64 {
-    uint64_t state;
-    uint64_t inc;
-
-};
-typedef struct pcg_state_setseq_64 pcg32_random_t;
-
-#define PCG32_INITIALIZER   { 0x853c49e6748fea9bULL, 0xda3e39cb94b95bdbULL }
-static pcg32_random_t pcg32_global = PCG32_INITIALIZER;
-
-//-- internals
-void     pcg32_srandom_r(pcg32_random_t*, uint64_t, uint64_t);
-uint32_t pcg32_random_r(pcg32_random_t*);
-uint32_t pcg32_boundedrand_r(pcg32_random_t*, uint32_t);
-
-//-- exported as FFI
-void   pcg_seed(int, int);
-void   pcg_seedTime(void);
-int    pcg_randInt(void);
-int    pcg_randBound(int);
-double pcg_randFloat(void);
-
+#include "pcg_headers.h"
 
 
 void pcg32_srandom_r(pcg32_random_t* rng, uint64_t initstate, uint64_t initseq)
@@ -90,6 +68,11 @@ uint32_t pcg32_random_r(pcg32_random_t* rng)
 int pcg_randInt()
 {
     return (int)pcg32_random_r(&pcg32_global);
+}
+
+uint pcg_randNat()
+{
+    return (uint)pcg32_random_r(&pcg32_global);
 }
 
 uint32_t pcg32_boundedrand_r(pcg32_random_t* rng, uint32_t bound)

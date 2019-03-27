@@ -11,7 +11,8 @@ SOURCES = $(shell echo *.c)
 HEADERS = $(shell echo *.h)
 OBJECTS = $(SOURCES:.c=.o)
 
-LIBS   = ../
+#LIBS   = ../
+LIBS   = ./
 INCUDE = ../
 
 TARGET=$(LIBS)/$(NAME).so

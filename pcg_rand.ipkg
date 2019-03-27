@@ -1,7 +1,9 @@
 package pcg_rand
 
 sourcedir = src
+makefile  = Makefile
 objs      = pcg_idris_ffi.so
 
 modules   = System.Random.PCG
+
 

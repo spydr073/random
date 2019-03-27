@@ -12,7 +12,7 @@
 
 module System.Random.PCG
 
-%dynamic "pcg_idris_ffi.so"
+%dynamic   "./pcg_idris_ffi.so"
 
 %default total
 %access private
@@ -23,27 +23,32 @@ module System.Random.PCG
 --{1
 
 ||| Set a seed using to base integers.
-export
+public export
 seed : Int -> Int -> IO ()
 seed = foreign FFI_C "pcg_seed" (Int -> Int -> IO ())
 
 ||| Set a seed using system time.
-export
+public export
 seedTime : IO ()
 seedTime = foreign FFI_C "pcg_seedTime" (IO ())
 
 ||| Return a random unsigned integer.
-export
+public export
 randInt : IO Int
 randInt = foreign FFI_C "pcg_randInt" (IO Int)
 
+||| Return a random unsigned integer.
+public export
+randNat : IO Int
+randNat = foreign FFI_C "pcg_randNat" (IO Int)
+
 ||| Return a random unsigned integer within some upper bound.
-export
+public export
 randBound : Int -> IO Int
 randBound = foreign FFI_C "pcg_randBound" (Int -> IO Int)
 
 ||| Return a random float between 0 and 1 (exclusive).
-export
+public export
 randFloat : IO Double
 randFloat = foreign FFI_C "pcg_randFloat" (IO Double)
 
@@ -53,7 +58,7 @@ randFloat = foreign FFI_C "pcg_randFloat" (IO Double)
 --{1
 
 ||| Return a list of random numbers.
-export
+public export
 randList : Num a => Nat -> IO a -> IO (List a)
 randList n rand with (n)
   | Z    = pure []
